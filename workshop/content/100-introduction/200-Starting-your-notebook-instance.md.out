@@ -1,0 +1,109 @@
++++
+title = "Creating your notebook instance"
+chapter = false
+weight = 200
++++
+
+In this section we will create a SageMaker notebook instance, which we will use for the other workshop modules.
+
+## Launching the Notebook Instance
+
+1. Make sure you are on the AWS Management Console home page. In the **Find Services** search box, type **SageMaker**. The search result list will populate with Amazon SageMaker, which you should now click. This will bring you to the Amazon SageMaker console homepage.
+
+   ![Services in Console](./images/console-services.png)
+
+2. In the upper-right corner of the AWS Management Console, confirm you are in the desired AWS region. 
+For today's workshop we will stick to us-east-1, North Virginia. 
+Ensure that you are in the same region for the remainder of these exercises. 
+
+3. To create a new notebook instance, click the **Notebook instances** link on the left side, and click the **Create notebook instance** button in the upper right corner of the browser window.
+
+   ![Notebook Instances](./images/notebook-instances.png)
+
+4. Type ai-ml-workshop-[First Name]-[Last Name] into the **Notebook instance name** text box, and select **ml.m5.xlarge** for the **Notebook instance type**.
+
+   ![Notebook Settings](./images/notebook-settings.png)
+
+5. In the **Permissions and encryption** section, choose **Create a new role** in the **IAM role** drop down menu.
+
+   In the resulting pop-up modal, select **None** under **S3 Buckets you specify – optional**.
+
+   Click **Create role**.
+
+   ![Create IAM role](./images/sm_role.png)
+
+6. You will be taken back to the Create Notebook instance page. Now you should see a message saying "Success! You created an IAM role."
+
+   ![Create Notebook Instance](./images/permissions-settings.png)
+
+7. Expand out the optional **Git repositories** section (note that this step is not optional for the purposes of this workshop).
+
+   - Select 'Clone a public Git repository to this notebook instance only'
+   - Open the home page of this GitHub repository in another tab: `https://github.com/johanneslanger/aws-ai-ml-workshop`
+   - Click the green **Clone or download** button from the upper right of the main page of the repository
+   - From the dialog opened after clicking **Clone or download**, copy the HTTPS URL: `https://github.com/johanneslanger/aws-ai-ml-workshop.git`
+   - Paste it into the Git Repository URL field
+   - Now your instance will launch with the latest version of these workshops already on it, in a folder called `aws-ai-ml-workshop`
+
+   ![Git Repositories](./images/repositories.png)
+
+8. Click **Create notebook instance** at the bottom.
+
+## Providing additional permissions
+
+**If you're new to AWS** then please take a couple of minutes to look through the [Intro to IAM]({{< relref "500-Intro-To-IAM" >}}) page, 
+as it is a fundamental building block for working on the AWS platform. 
+
+The default permissions to the notebook won't be enough to run through the labs successfully as we will be calling additional services from our notebooks.
+**Note: We will add a wide range of permission for the SageMaker instance to allow quick experimentation. These permissions should be scoped down in a production scenario!**
+
+1. On the notebook instances click on the name of the instance we have just created
+2. Select the role in the "Permissions and encryption" section to bring up the role in IAM
+
+   ![role selection](./images/role-selection.png)
+
+3. Select 'Attach Policy'
+4. Create Policy --> JSON and paste the JSON below
+
+    ```json
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+        "Sid": "workshopPerm1",
+        "Effect": "Allow",
+        "Action": ["personalize:*", "s3:*", "lex:*"],
+        "Resource": "*"
+        },
+        {
+        "Sid": "workshopPerm2",
+        "Effect": "Allow",
+        "Action": [
+            "iam:GetRole",
+            "iam:PassRole",
+            "iam:CreateRole",
+            "iam:AttachRolePolicy"
+        ],
+        "Resource": "arn:aws:iam::*:role/*"
+        }
+    ]
+    }
+    ```
+
+5. Type in  'aiml-workshop-policy' for name and description and create the policy. (if you are working in a shared account then please postfix your initials onto the policy name, and then use that in the next steps, or designate one person to create the policy, and you all share it)
+6. Go back to the SageMaker execution role in IAM ( If you don't have it open anymore SageMaker --> NotebookInstances --> smworkshop-firstName-LastName --> Permissions and encryption)
+7. Select 'Attach policy' --> Select the checkbox for 'aiml-workshop-policy' and click 'Attach policy'
+
+    The Role "AmazonSageMaker-ExecutionRole-(timestamp) should now have 3 policies attached:
+
+    ![Role final](./images/role-final.png)
+
+## Accessing the Notebook Instance
+
+1. Wait for the server status to change to **InService**. This will take several minutes, possibly up to ten but likely much less.
+
+    ![Access Notebook](./images/open-notebook.png)
+
+2. Click **Open Jupyter**. You will now see the Jupyter homepage for your notebook instance.
+
+    Move on to an introduction of [Jupyter Notebooks]({{< relref "300-Jupyter-notebooks" >}})

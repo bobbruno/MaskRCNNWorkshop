@@ -1,0 +1,6 @@
+.DS_Store
+workshop/public/
+node_modules/
+.vscode
+.pptx#
+deck/.~lock*

@@ -1,0 +1,49 @@
+baseURL = "https://ml-on-aws.labgui.de/"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+title = "AWS AI/ML workshop"
+theme = "learn"
+uglyurls = true
+sectionPagesMenu = "main"
+pygmentsCodeFences = true
+pygmentsStyle = "monokai"
+
+
+[params]
+themeVariant = "mine"
+showVisitedLinks = false
+author = "AWS_EMEA"
+description = "AWS AI/ML workshop"
+disableSearch = true
+disableAssetsBusting = true
+disableLanguageSwitchingButton = true
+disableShortcutsTitle = true
+project = "aiml"
+
+[[menu.shortcuts]]
+name = "<i class='fab fa-github'></i> Workshop github repo"
+identifier = "ds"
+url = "https://github.com/bobbruno/mask_rcnn_lab"
+weight = 1
+
+[[menu.shortcuts]]
+name = "<i class='fab fa-twitter'></i> @awscloud"
+identifier = "ttg"
+url = "https://twitter.com/awscloud"
+weight = 1
+
+[[menu.shortcuts]]
+name = "<i class='fab fa-twitter'></i> @AWS_DACH"
+identifier = "mm"
+url = "https://twitter.com/AWS_DACH"
+weight = 1
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-globe'></i> Machine Learning on AWS"
+identifier = "mlaws"
+url = "https://aws.amazon.com/machine-learning/"
+weight = 1
+
+[outputs]
+home = [ "HTML", "AMP", "RSS", "JSON"]
+page = [ "HTML", "AMP"]

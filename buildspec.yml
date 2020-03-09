@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+    commands:
+      - curl -L https://github.com/gohugoio/hugo/releases/download/v0.50/hugo_0.50_Linux-64bit.tar.gz -o /tmp/hugo.tar.gz \
+      - tar -xzf /tmp/hugo.tar.gz -C /usr/local/bin
+      - npm i minify -g
+      - npm i browserify -g
+      - wget https://dl.google.com/closure-compiler/compiler-latest.zip
+      - mkdir closure-compiler
+      - mv ./compiler-latest.zip ./closure-compiler
+      - cd ./closure-compiler && unzip compiler-latest.zip && cd ../
+      - mv ./closure-compiler/*.jar ./closure-compiler/closure-compiler.jar
+  build:
+    commands:
+      - rm -rf workshop/public
+      - cd workshop
+      - npm i
+      - hugo -v
+      - browserify public/js/main.js -o public/js/built.js
+      - java -jar ../closure-compiler/closure-compiler.jar --js ./public/js/built.js --js_output_file ./public/js/compiled.js
+      - minify ./public/js/compiled.js > ./public/js/build.min.js
+artifacts:
+  files:
+  - '**/*'
+  base-directory: workshop/public
+  name: website-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-6)-$(date +%Y-%m-%d)
