@@ -8,10 +8,13 @@ Before going into the labs, let's start the training of the object detection mod
 
 ***Step-by-step instructions***
 
-These are detailed step-by-step instructions - **don't bother understanding what you're doing at this point**. WE will explain what is happening at each step later today, after covering the basics. Just follow each step and ask for help if you need it.
+These are detailed step-by-step instructions - **don't bother understanding what you're doing at this point**. We will explain what is happening at each step later today, after covering the basics. Just follow each step and ask for help if you need it.
 
 ## 1. Set up the environment
 
+1. If you haven't yet, login to the AWS Account provided.
+2. On the top right, make sure you are on region "`us-east-1`". If needed, change it to `us-east-1` using the dropdown.
+3. On the "Find Services" Search box, start typing _CloudFormation_. When it show up on the drop-down box, click on it. You will need to access this tab again during the workshop, so leave it open.
 1. Open a terminal window in your machine and navigate to a folder where you can clone a repository.
 2. Clone the sagemaker examples repo from git:
 	`git clone https://github.com/bobbruno/mask_rcnn_lab.git`

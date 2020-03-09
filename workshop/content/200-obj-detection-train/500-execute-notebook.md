@@ -5,17 +5,21 @@ weight = 500
 +++
 
 1. Scroll down to the first code cell and click on it.
-1. Set `aws_region` and `s3_bucket` to the same values you did on the CloudFormation script or console.
-2. Execute the cells to stage COCO 2017 dataset in Amazon S3 and to copy COCO 2017 dataset from S3 to Amazon EFS
-3. Keep executing cells until you get to one containing the following command:
+1. If `aws_region` and `s3_bucket` are not set, set them to the values used in the CloudFormation script or console. If you don't know the bucket name:
+	- Go back to the CloudFormation tab
+	- Click on the stack name to check its details
+	- Look into the "Parameters" tab to see the bucket name.
+2. Skip the cells to stage COCO 2017 dataset in Amazon S3 and to copy COCO 2017 dataset from S3 to Amazon EFS. They have been pre-loaded for you. If you want to see what they do, you can double-click on the shell scripts in the File Browser.
+3. From the next cell, keep executing all cells until you get to one containing the following command:
 	```
 	%%time
+	
 	! ./container/build_tools/build_and_push.sh {aws_region}
 	```
-4. Execute the command, wait for it to finish, scroll to the end of the cell output and copy the Amazon ECR URI. It should look like this:
+4. Execute the command, wait for it to finish (it will take some time to download the base docker image), scroll to the end of the cell output and copy the Amazon ECR URI. It should look like this:
 	`dkr.ecr.us-east-1.amazonaws.com/mask-rcnn-tensorpack-sagemaker:tf1.13-xxxxxxxxx`
 5. On the next cell, replace `#<amazon-ecr-uri\>` with the URI you just copied, between quotes.
-6. Skip the cells under "AWS Samples Mask R-CNN" and go directly to the first cell under "SageMaker Initialization"
+6. Skip the cells under "AWS Samples Mask R-CNN" and go directly to the first cell under "SageMaker Initialization".
 7. Execute that cell. On the next one, replace `# set to tensorpack_image or aws_samples_image` with `tensorpack_image`. Execute the cell after the edit.
 8. Under "Define SageMaker Data Channels":
 	- The first cell will retrieve the id of the EFS attached to the instance. That will be needed in the second cell.

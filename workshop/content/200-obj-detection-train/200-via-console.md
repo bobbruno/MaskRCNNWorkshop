@@ -4,6 +4,8 @@ chapter = false
 weight = 100
 +++
 
+**These steps should already be done on your account. They are here for your reference, in case you want to repeat the lab on another account. Please proceed to the next page.**
+
 **Only follow these instructions if you haven't done the [Via Command Line]({{< relref "100-via-command-line" >}}) steps.**
 
 1. Login to the AWS Account provided
@@ -13,7 +15,8 @@ weight = 100
 	![CloudFormation Stacks](resources/cloudformation-stacks.png?width=800px)
 5. On the "Create Stack" page, select "Template is ready" under "Prepare template" and "upload a template file" under "Specify template".
 	![Create Stack](resources/create-stack.png?width=800px)
-6. Click on "Choose file", navigate to the git repo you cloned before, go to the `amazon-sagemaker-examples\advanced_functionality\distributed_tensorflow_mask_rcnn` folder and select the `cfn-sm.yaml` file.
+6. Click on "Choose file" and navigate to the git repo you cloned before
+6. Go to the `mask_rcnn_lab/mask_rcnn/` folder and select the `cfn-sm.yaml` file.
 7. Click "Next".
 8. On the "Specify Stack Details" page, give the stack a name. We suggest "`sm-stack-2020-03-10`".
 9. Under "Parameters", go to "S3BucketName" and fill it with "`mask-rcnn-demo-coco-iad-<unique-id>`". Leave the other parameters as they are.

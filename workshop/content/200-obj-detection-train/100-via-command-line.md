@@ -3,6 +3,8 @@ title = "2a. Via Command Line"
 chapter = false
 weight = 100
 +++
+**These steps should already be done on your account. They are here for your reference, in case you want to repeat the lab on another account. Please proceed to the next page.**
+
 **Only follow these instructions if you haven't done the [Via Amazon Console]({{< relref "200-via-console" >}}) steps.**
 
 To follow this option, you'll need:
